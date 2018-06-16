@@ -18,13 +18,11 @@
 # tasks file for ansible-role-sssh
 
 
-- include: savemoduli.yml
-  static: yes
+- import_tasks: savemoduli.yml
   tags: moduli
   when: moduli_generate
 
-- include: server_keys.yml
-  static: yes
+- import_tasks: server_keys.yml
 
 - name: Limit to protocol version 2
   lineinfile:
