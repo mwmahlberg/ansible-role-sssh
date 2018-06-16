@@ -19,7 +19,10 @@
 
 test: up provision
 
-provision:
+prepare: up
+	vagrant provision --provision-with shell
+
+provision: prepare
 	vagrant provision --provision-with ansible
 
 up:
@@ -28,8 +31,8 @@ up:
 upgrade:
 	vagrant box update
 
-generate: up
-	ANSIBLE_ARGS='--extra-vars "moduli_generate=true moduli_size=512"' vagrant provision
+generate: prepare
+	ANSIBLE_ARGS='--extra-vars "moduli_generate=true moduli_size=512"' vagrant provision --provision-with ansible
 
 clean:
 	@vagrant destroy -f
