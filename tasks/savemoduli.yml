@@ -16,17 +16,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ---
 - name: create new moduli for diffie-hellman-group-exchange-sha256
-  command: ssh-keygen -G /etc/ssh/moduli.all -b {{ moduli_size }}
-  creates: /etc/ssh/moduli.all
-
-- name: filter out insufficient primes for diffie-hellman-group-exchange-sha256
-  command: ssh-keygen -T /etc/ssh/moduli.safe -f /etc/ssh/moduli.all
-  creates: /etc/ssh/moduli.safe
-
-- name: remove generated moduli including unsafe ones
-  file:
-    path: /etc/ssh/moduli.all
-    state: absent
+  command: bash -c "ssh-keygen -b {{ moduli_size }} -G /dev/stdout | ssh-keygen -T /etc/ssh/moduli.new"
+  args:
+    creates: /etc/ssh/moduli.new
 
 - name: replace existing moduli for diffie-hellman-group-exchange-sha256
-  command: mv /etc/ssh/moduli.safe /etc/ssh/moduli
+  command: mv /etc/ssh/moduli.new /etc/ssh/moduli
+  args:
+    removes: /etc/ssh/moduli.new
