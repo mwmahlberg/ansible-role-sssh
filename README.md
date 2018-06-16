@@ -28,7 +28,7 @@ This repositoy contains an [ansible][wp:ansible] role based on [@stribika][gh:st
 
 
 
-[![asciicast](https://asciinema.org/a/8KMZN2sPiSIfC29bqMqvBacFD.png){:width="50%"}](https://asciinema.org/a/8KMZN2sPiSIfC29bqMqvBacFD?speed=2&theme=monokai&autoplay=1)
+[![asciicast](https://asciinema.org/a/8KMZN2sPiSIfC29bqMqvBacFD.png){:height="36px" width="36px"}](https://asciinema.org/a/8KMZN2sPiSIfC29bqMqvBacFD?speed=2&theme=monokai&autoplay=1)
 
 
 
