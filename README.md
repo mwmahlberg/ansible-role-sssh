@@ -26,7 +26,7 @@ This repositoy contains an [ansible][wp:ansible] role based on [@stribika][gh:st
 
 ## Installation
 
-[![asciicast](https://asciinema.org/a/8KMZN2sPiSIfC29bqMqvBacFD.png?speed=2&theme=monokai)](https://asciinema.org/a/8KMZN2sPiSIfC29bqMqvBacFD)
+<script src="https://asciinema.org/a/8KMZN2sPiSIfC29bqMqvBacFD.js" id="asciicast-8KMZN2sPiSIfC29bqMqvBacFD" async></script>
 
 
 
