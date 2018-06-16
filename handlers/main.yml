@@ -1,7 +1,16 @@
 ---
 # handlers file for ansible-sssh
 
-- name: restart sshd
+- name: restart sshd on RedHat family OSes
   service:
     name: sshd
     state: restarted
+  when: ansible_os_family == "RedHat"
+  listen: restart sshd
+
+- name: restart ssh on Debian family OSes
+  service:
+    name: ssh
+    state: restarted
+  when: ansible_os_family == "Debian"
+  listen: restart sshd
