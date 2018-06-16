@@ -34,3 +34,6 @@ script:
   - cat ansible.cfg
   - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
   - ansible-playbook -i tests/inventory tests/test.yml --connection=local -b
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
