@@ -1,0 +1,16 @@
+---
+- name: create new moduli for diffie-hellman-group-exchange-sha256
+  command: ssh-keygen -G /etc/ssh/moduli.all -b {{ moduli_size }}
+  creates: /etc/ssh/moduli.all
+
+- name: filter out insufficient primes for diffie-hellman-group-exchange-sha256
+  command: ssh-keygen -T /etc/ssh/moduli.safe -f /etc/ssh/moduli.all
+  creates: /etc/ssh/moduli.safe
+
+- name: remove generated moduli including unsafe ones
+  file:
+    path: /etc/ssh/moduli.all
+    state: absent
+
+- name: replace existing moduli for diffie-hellman-group-exchange-sha256
+  command: mv /etc/ssh/moduli.safe /etc/ssh/moduli

@@ -1,0 +1,24 @@
+---
+
+- name: Ensure only secure server key pairs are (re-)generated
+  lineinfile:
+    path: /etc/sysconfig/sshd
+    regexp: '^#?\s?AUTOCREATE_SERVER_KEYS'
+    line: 'AUTOCREATE_SERVER_KEYS="RSA ED25519"'
+  when: ansible_os_family == "RedHat"
+
+- name: Remove potentially insecure ECDSA server key from sshd config
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?\s*HostKey /etc/ssh/ssh_host_ecdsa_key'
+    line: '# HostKey /etc/ssh/ssh_host_ecdsa_key'
+
+- name: Remove potentially insecure ECDSA server key (private)
+  file:
+    path: /etc/ssh/ssh_host_ecdsa_key
+    state: absent
+
+- name: Remove potentially insecure ECDSA server key (public)
+  file:
+    path: /etc/ssh/ssh_host_ecdsa_key.pub
+    state: absent
