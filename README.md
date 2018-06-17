@@ -20,6 +20,8 @@ Ansible role for a Secure OpenSSH configuration.
   - [Overview](#overview)
   - [Notes on variables](#notes-on-variables)
 - [Usage](#usage)
+  - [Instructions](#instructions)
+  - [Screencast](#screencast)
 
 <!-- TOC END -->
 ---
@@ -200,6 +202,8 @@ The default value for `sssh_moduli_size` is 4096. This roughly translates to "Sh
 
 ## Usage
 
+### Instructions
+
 0. **Make sure you have Public Key Authentication tested on all target hosts!**
    Otherwise, you will not be able to log in to the target hosts via SSH any more
    after applying the role.
@@ -223,6 +227,10 @@ The default value for `sssh_moduli_size` is 4096. This roughly translates to "Sh
         - mwmahlberg.sssh
     ```
 1. Run your playbook
+
+### Screencast
+
+[![asciicast](https://asciinema.org/a/187545.png)](https://asciinema.org/a/187545)
 
 [wp:ansible]: https://en.wikipedia.org/wiki/Ansible_(software) "Wikipedia article on ansible"
 [wp:ssh-vulnerabilities-v1]: https://en.wikipedia.org/wiki/Secure_Shell#SSH-1
