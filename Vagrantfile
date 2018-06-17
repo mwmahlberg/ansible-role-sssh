@@ -42,7 +42,6 @@ Vagrant.configure("2") do |config|
       # Basic Ubuntu Images do not contain python
 
       if box.match(/^ubuntu.*/)
-        puts "Installing python"
         machine.vm.provision "shell", inline: <<-SHELL
            apt-get update
            apt-get install -y python

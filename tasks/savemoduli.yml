@@ -16,7 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ---
 - name: create new moduli for diffie-hellman-group-exchange-sha256
-  command: bash -c "ssh-keygen -b {{ moduli_size }} -G /dev/stdout | ssh-keygen -T /etc/ssh/moduli.new"
+  command: bash -c "ssh-keygen -b {{ sssh_moduli_size }} -G /dev/stdout | ssh-keygen -T /etc/ssh/moduli.new"
   args:
     creates: /etc/ssh/moduli.new
 

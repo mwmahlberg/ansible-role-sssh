@@ -15,7 +15,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-.PHONY: test up provision generate clean
+# VAGRANT := $(which vagrant)
+#
+# ifndef VAGRANT
+#     $(error vagrant is not available. Please install vagrant)
+# endif
+
+.PHONY: test prepare provision up upgrade generate clean
+
+MODULI_SIZE ?= 1024
 
 test: up provision
 
@@ -32,7 +40,11 @@ upgrade:
 	vagrant box update
 
 generate: prepare
-	ANSIBLE_ARGS='--extra-vars "moduli_generate=true moduli_size=512"' vagrant provision --provision-with ansible
+	$(info Generating new modulus files with $(MODULI_SIZE) bit moduli)
+	d=$$(date +%s)\
+	; ANSIBLE_ARGS='--extra-vars "sssh_moduli_generate=true sssh_moduli_size=$(MODULI_SIZE)"' vagrant provision --provision-with ansible \
+	&& echo "Build took $$(($$(date +%s)-d)) seconds"
+
 
 clean:
 	@vagrant destroy -f
