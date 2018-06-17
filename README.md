@@ -73,7 +73,7 @@ The DES and and RC4 ciphers are not deemed suffciently secured any more and ther
 are excluded by default.
 
 > **Note**<br/>
-> You might wonder why "aes128-gcm@openssh.com" and "aes128-ctr" are included
+> You might wonder why `aes128-gcm@openssh.com` and `aes128-ctr` are included
 > by default. Since they are run in [Counter Mode (ctr)][wp:ctr] or [Galois/Counter Mode(gcm)][wp:gcm]
 > they are considered suffciently secure, despite its relative small key size.
 
@@ -164,8 +164,6 @@ into your shell.
 
 Below you will find the variables used in this role.
 
-They can be set
-
 ### Overview
 ---
 
@@ -173,9 +171,9 @@ They can be set
 | -------------------- | -------- | --------------------------------------------- |
 | sssh_moduli_generate | false    | wether a new modulus file should be generated |
 | sssh_moduli_size     | 4096     | size of each individual modulus               |
-| sssh_kex_algorithms  | - curve25519-sha256@libssh.org<br/> - diffie-hellman-group-exchange-sha256 | key exchange algorithms permitted |
-| sssh_ciphers         |<br/> - aes256-gcm@openssh.com<br/> - aes256-ctr<br/> - chacha20-poly1305@openssh.com<br/> - aes192-ctr<br/> - aes128-gcm@openssh.com<br/> - aes128-ctr | sssh_ciphers supported for encryption |
-| sssh_macs            |- hmac-sha2-512-etm@openssh.com<br/>- hmac-sha2-256-etm@openssh.com<br/>- umac-128-etm@openssh.com<br/>- hmac-sha2-512<br/>- hmac-sha2-256<br/>- umac-128@openssh.com<br/>| Message Authentication Codes supported |
+| sssh_kex_algorithms  | - `curve25519-sha256@libssh.org`<br/> - `diffie-hellman-group-exchange-sha256` | key exchange algorithms permitted |
+| sssh_ciphers         |<br/> - `aes256-gcm@openssh.com`<br/> - `aes256-ctr`<br/> - `chacha20-poly1305@openssh.com`<br/> - `aes192-ctr`<br/> - `aes128-gcm@openssh.com`<br/> - `aes128-ctr` | sssh_ciphers supported for encryption |
+| sssh_macs            |- `hmac-sha2-512-etm@openssh.com`<br/>- `hmac-sha2-256-etm@openssh.com`<br/>- `umac-128-etm@openssh.com`<br/>- `hmac-sha2-512`<br/>- `hmac-sha2-256`<br/>- `umac-128@openssh.com`<br/>| Message Authentication Codes supported |
 
 ---
 ### Notes on variables
@@ -190,7 +188,7 @@ If set to `true`, the file [`/etc/ssh/moduli`][man:moduli] will be regenerated.
 It should only be set to `true` via commandline. If you set this to `true` in a playbook or inventory,
 `/etc/ssh/moduli` will be generated _each time_ the role is applied.
 
-This setting is useless when you exclude "diffie-hellman-group-exchange-sha256"
+This setting is useless when you exclude `diffie-hellman-group-exchange-sha256`
 from `ssh_kex_algotithms` and will be ignored in this case.
 
 #### sssh_moduli_size
