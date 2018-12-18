@@ -160,7 +160,7 @@ into your shell.
 <!-- Click on the image below to see a screen recording on what to expect during the installation.
 
 <a href="https://asciinema.org/a/8KMZN2sPiSIfC29bqMqvBacFD?speed=2&theme=monokai&autoplay=1" target="_blank"><img src="https://asciinema.org/a/8KMZN2sPiSIfC29bqMqvBacFD.png"  width="250"/></a> -->
-[![asciicast](https://asciinema.org/a/187545.svg)](https://asciinema.org/a/187545)
+[![asciicast](https://asciinema.org/a/187545.svg)](https://asciinema.org/a/187545?autoplay=1)
 
 ## Role variables
 
@@ -230,7 +230,7 @@ The default value for `sssh_moduli_size` is 4096. This roughly translates to "Sh
 
 ### Screencast
 
-[![asciicast](https://asciinema.org/a/187545.svg)](https://asciinema.org/a/187545)
+[![asciicast](https://asciinema.org/a/187545.svg)](https://asciinema.org/a/187545?autoplay=1)
 
 
 [wp:ansible]: https://en.wikipedia.org/wiki/Ansible_(software) "Wikipedia article on ansible"
