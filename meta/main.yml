@@ -1,45 +1,50 @@
+# ansible-role-sssh - Role for configuring your sshd according to https://stribika.github.io/2015/01/04/secure-secure-shell.html
+#
+# Copyright (C) 2018  Markus Mahlberg <markus.mahlberg@icloud.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 galaxy_info:
-  author: your name
-  description: your role description
+  author: Markus Mahlberg
+  description: Role for configuring Secure SSH
   company: your company (optional)
 
-  # If the issue tracker for your role is not on github, uncomment the
-  # next line and provide a value
-  # issue_tracker_url: http://example.com/issue/tracker
+  license: GPLv3
 
-  # Choose a valid license ID from https://spdx.org - some suggested licenses:
-  # - BSD-3-Clause (default)
-  # - MIT
-  # - GPL-2.0-or-later
-  # - GPL-3.0-only
-  # - Apache-2.0
-  # - CC-BY-4.0
-  license: license (GPL-2.0-or-later, MIT, etc)
-
-  min_ansible_version: 2.9
-
-  # If this a Container Enabled role, provide the minimum Ansible Container version.
-  # min_ansible_container_version:
+  min_ansible_version: 2.4
 
   #
-  # Provide a list of supported platforms, and for each platform a list of versions.
-  # If you don't wish to enumerate all versions for a particular platform, use 'all'.
-  # To view available platforms and versions (or releases), visit:
-  # https://galaxy.ansible.com/api/v1/platforms/
+  # platforms is a list of platforms, and each platform has a name and a list of versions.
   #
-  # platforms:
-  # - name: Fedora
-  #   versions:
-  #   - all
-  #   - 25
-  # - name: SomePlatform
-  #   versions:
-  #   - all
-  #   - 1.0
-  #   - 7
-  #   - 99.99
+  platforms:
+    - name: EL
+      versions:
+        - 8
+        - 7
+    - name: Debian
+      versions:
+        - stretch
+        - jessie
+    - name: Ubuntu
+      versions:
+        - focal
+        - eoan
+        - bionic
+        - xenial
+        - trusty
 
-  galaxy_tags: []
+  galaxy_tags: ["ssh"]
     # List tags for your role here, one per line. A tag is a keyword that describes
     # and categorizes the role. Users find roles by searching for tags. Be sure to
     # remove the '[]' above, if you add tags to this list.
@@ -50,4 +55,3 @@ galaxy_info:
 dependencies: []
   # List your role dependencies here, one per line. Be sure to remove the '[]' above,
   # if you add dependencies to this list.
-  

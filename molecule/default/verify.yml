@@ -4,6 +4,15 @@
 - name: Verify
   hosts: all
   tasks:
-  - name: Example assertion
+  - stat:
+      path: /etc/ssh/ssh_host_ecdsa_key
+    register: ecdsakey
+  - name: ECDSA private key is no longer present
     assert:
-      that: true
+      that: not ecdsakey.stat.exists
+  - stat:
+      path: /etc/ssh/ssh_host_ecdsa_key.pub
+    register: ecdsa      
+  - name: ECDSA public key is no longer present
+    assert:
+      that: not ecdsa.stat.exists      
