@@ -1,0 +1,20 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  tasks:
+  - name: Look for ECDSA private key
+    stat:
+      path: /etc/ssh/ssh_host_ecdsa_key
+    register: ecdsakey
+  - name: ECDSA private key is no longer present
+    assert:
+      that: not ecdsakey.stat.exists
+  - name: Look for ECDSA public key
+    stat:
+      path: /etc/ssh/ssh_host_ecdsa_key.pub
+    register: ecdsa
+  - name: ECDSA public key is no longer present
+    assert:
+      that: not ecdsa.stat.exists

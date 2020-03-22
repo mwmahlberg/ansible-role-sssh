@@ -18,7 +18,6 @@
 galaxy_info:
   author: Markus Mahlberg
   description: Role for configuring Secure SSH
-  company: your company (optional)
 
   license: GPLv3
 
@@ -30,15 +29,13 @@ galaxy_info:
   platforms:
     - name: EL
       versions:
+        - 8
         - 7
-    - name: Debian
-      versions:
-        - stretch
-        - jessie
     - name: Ubuntu
       versions:
+        - focal
         - bionic
-        - trusty
+        - xenial
 
   galaxy_tags: ["ssh"]
     # List tags for your role here, one per line. A tag is a keyword that describes

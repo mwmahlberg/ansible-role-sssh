@@ -17,6 +17,7 @@
 
 ---
 # defaults file for ansible-sssh
+sssh_rsa_key_size: 4096
 sssh_moduli_generate: false
 sssh_moduli_size: 4096
 sssh_kex_algorithms:
