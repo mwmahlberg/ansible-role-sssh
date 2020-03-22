@@ -30,7 +30,7 @@
     group: root
     mode: 0755
     state: directory
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_os_family == 'Debian'
 
 - import_tasks: server_keys.yml
 

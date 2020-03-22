@@ -4,14 +4,7 @@ dependency:
 driver:
   name: docker
 
-  # - name: fedora_latest
-  #   image: docker.io/fedora:latest
-  # - name: fedora32
-  #   image: docker.io/fedora:32     
-  # - name: fedora_rawhide
-  #   image: docker.io/fedora:rawhide
-  # - name: centos8
-  #   image: docker.io/centos:8  
+
 platforms:
   - name: sssh_centos7
     image: centos:7
@@ -28,13 +21,13 @@ platforms:
       - /run
       - /tmp
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro      
-  # - name: ubuntu16.04_xenial
-  #   image: docker.io/jrei/systemd-ubuntu:16.04      
-  # - name: ubuntu18.04_bionic
-  #   image: docker.io/jrei/systemd-ubuntu:18.04
-  # - name: ubuntu20.04_focal
-  #   image: docker.io/jrei/systemd-ubuntu:20.04       
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: ubuntu16.04_xenial
+    image: docker.io/jrei/systemd-ubuntu:16.04      
+  - name: ubuntu18.04_bionic
+    image: docker.io/jrei/systemd-ubuntu:18.04
+  - name: ubuntu20.04_focal
+    image: docker.io/jrei/systemd-ubuntu:20.04       
 provisioner:
   name: ansible
 verifier:
