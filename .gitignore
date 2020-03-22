@@ -1,8 +1,0 @@
-
-\.vagrant/
-
-tests/test\.retry
-
-*.log
-
-*.retry
