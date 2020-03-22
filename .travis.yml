@@ -1,6 +1,10 @@
 ---
 language: python
-python: "2.7"
+python:
+  - "2.7"
+  - "3.6"
+  - "3.7"
+  - "nightly"
 services:
 - docker
 # Use the new container infrastructure
