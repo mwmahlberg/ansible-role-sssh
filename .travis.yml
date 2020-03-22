@@ -7,6 +7,16 @@ python:
   - "3.6"
   - "3.7"
   - "nightly"
+env:
+  - ANSIBLE=2.9.6
+  - ANSIBLE=2.8.10
+  - ANSIBLE=2.7.16
+  - ANSIBLE=2.6.20
+  - ANSIBLE=2.5.15
+  - ANSIBLE=2.4.6.0
+  - MOLECULE=3.0.2
+  - MOLECULE=2.22
+
 services:
 - docker
 
@@ -15,10 +25,10 @@ addons:
   apt:
     packages:
     - python-pip
-
 install:
   # Install ansible
-  - pip install molecule[docker,lint]
+  - pip install ansible==$ANSIBLE
+  - pip install molecule[docker,lint]==$MOLECULE
 
   # Check ansible version
   - molecule --version
