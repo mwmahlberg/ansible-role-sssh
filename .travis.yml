@@ -20,8 +20,6 @@ install:
   - molecule --version
 
 script:
-  # Basic role syntax check
-  - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
 
   # Run molecule tests
   - molecule test
