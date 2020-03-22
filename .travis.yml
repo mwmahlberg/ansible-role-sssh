@@ -9,7 +9,7 @@ python:
   - "nightly"
 env:
   - MOLECULE=3.0.2
-  - MOLECULE=2.2.2
+  - MOLECULE=2.22
 
 services:
 - docker
