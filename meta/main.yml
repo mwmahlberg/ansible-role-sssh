@@ -17,7 +17,7 @@
 
 galaxy_info:
   author: Markus Mahlberg
-  description: Role for configuring Secure SSH
+  description: Role for configuring OpenSSH securely
 
   license: GPLv3
 
