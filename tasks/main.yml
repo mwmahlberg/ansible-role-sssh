@@ -53,7 +53,7 @@
   lineinfile:
     path: /etc/ssh/sshd_config
     regexp: '^#?KexAlgorithms .*'
-    line: "KexAlgorithms {{ sssh_kex_algorithms|join(',')}}"
+    line: "KexAlgorithms {{ sssh_kex_algorithms|join(',') }}"
     validate: "/usr/sbin/sshd -t -f %s"
   notify: restart sshd
 
@@ -61,7 +61,7 @@
   lineinfile:
     path: /etc/ssh/sshd_config
     regexp: "^#?Ciphers .*"
-    line: "Ciphers {{ sssh_ciphers|join(',')}}"
+    line: "Ciphers {{ sssh_ciphers|join(',') }}"
     validate: "/usr/sbin/sshd -t -f %s"
   notify: restart sshd
 
@@ -69,7 +69,7 @@
   lineinfile:
     path: /etc/ssh/sshd_config
     regexp: "^#?MACs .*"
-    line: "MACs {{ sssh_macs|join(',')}}"
+    line: "MACs {{ sssh_macs|join(',') }}"
     validate: "/usr/sbin/sshd -t -f %s"
   notify: restart sshd
 

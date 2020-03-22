@@ -1,4 +1,6 @@
 ---
+os: linux
+dist: xenial
 language: python
 python:
   - "2.7"
@@ -7,8 +9,6 @@ python:
   - "nightly"
 services:
 - docker
-# Use the new container infrastructure
-sudo: false
 
 # Install ansible
 addons:
