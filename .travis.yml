@@ -3,7 +3,6 @@ os: linux
 dist: xenial
 language: python
 python:
-  - "2.7"
   - "3.6"
   - "3.7"
   - "nightly"
@@ -25,7 +24,7 @@ env:
   - ANSIBLE=2.9.4
   - ANSIBLE=2.9.5
   - ANSIBLE=2.9.6
-  
+
 services:
 - docker
 
