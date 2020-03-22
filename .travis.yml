@@ -7,14 +7,6 @@ python:
   - "3.7"
   - "nightly"
 env:
-  - ANSIBLE=2.8.0
-  - ANSIBLE=2.8.1
-  - ANSIBLE=2.8.2
-  - ANSIBLE=2.8.3
-  - ANSIBLE=2.8.4
-  - ANSIBLE=2.8.5
-  - ANSIBLE=2.8.6
-  - ANSIBLE=2.8.7
   - ANSIBLE=2.8.8
   - ANSIBLE=2.8.9
   - ANSIBLE=2.8.10
