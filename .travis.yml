@@ -5,17 +5,17 @@ language: python
 python:
   - "3.6"
   - "3.7"
-  - "nightly"
+  - "3.8"
 env:
-  - ANSIBLE=2.8.8
-  - ANSIBLE=2.8.9
-  - ANSIBLE=2.8.10
-  - ANSIBLE=2.9.1
   - ANSIBLE=2.9.2
   - ANSIBLE=2.9.3
   - ANSIBLE=2.9.4
   - ANSIBLE=2.9.5
   - ANSIBLE=2.9.6
+  - ANSIBLE=2.9.7
+  - ANSIBLE=2.9.8
+  - ANSIBLE=2.9.9
+  - ANSIBLE=2.9.10
 
 services:
 - docker
