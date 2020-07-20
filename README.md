@@ -1,8 +1,13 @@
-[![GitHub license](https://img.shields.io/github/license/mwmahlberg/ansible-role-sssh.svg)](https://github.com/mwmahlberg/ansible-role-sssh/blob/master/LICENSE) [![Build Status](https://travis-ci.org/mwmahlberg/ansible-role-sssh.svg?branch=master)](https://travis-ci.org/mwmahlberg/ansible-role-sssh)
+ansible-role-sssh
+=================
 
-# ansible-role-sssh
+[![GitHub license](https://img.shields.io/github/license/mwmahlberg/ansible-role-sssh.svg)](https://github.com/mwmahlberg/ansible-role-sssh/blob/master/LICENSE) [![Build Status](https://travis-ci.org/mwmahlberg/ansible-role-sssh.svg?branch=master)](https://travis-ci.org/mwmahlberg/ansible-role-sssh) ![GitHub issues](https://img.shields.io/github/issues-raw/mwmahlberg/ansible-role-sssh)
 
 Ansible role for a Secure OpenSSH configuration.
+
+> :warning: All versions prior to 1.2.2 contain a [bug which causes both the ED25519 and RSA key files to contain ED25519 keys](https://github.com/mwmahlberg/ansible-role-sssh/issues/8).
+>
+> You should update immediately.
 
 ---
 <!-- TOC START min:2 max:3 link:true update:true -->
