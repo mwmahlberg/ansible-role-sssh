@@ -16,7 +16,22 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ---
 # tasks file for ansible-role-sssh
+- name: Ensure apt cache is updated
+  apt:
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu" or ansible_distribution=="Debian"
+- name: Ensure sshd is present
+  package:
+    name: openssh-server
+    state: present
+  register: package
 
+- name: Ensure sshd is enabled and started
+  systemd:
+    name: sshd
+    state: started
+    enabled: true
+  when: package.changed
 
 - import_tasks: savemoduli.yml
   tags: moduli
