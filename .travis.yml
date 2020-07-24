@@ -1,6 +1,4 @@
 ---
-os: linux
-dist: xenial
 language: python
 cache: pip
 python:
@@ -21,22 +19,15 @@ env:
 services:
 - docker
 
-# Install ansible
-addons:
-  apt:
-    packages:
-    - python-pip
 install:
   # Install ansible
-  - pip install ansible==$ANSIBLE
-  - pip install molecule[docker,lint]
+  - pip install ansible==$ANSIBLE molecule[docker,lint] yamllint ansible-lint docker
 
   # Check ansible version
   - ansible --version
   - molecule --version
 
 script:
-
   # Run molecule tests
   - molecule test
 
