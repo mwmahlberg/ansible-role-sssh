@@ -88,7 +88,7 @@ services:
 
 install:
   # Install ansible
-  - pip install ansible==$ANSIBLE molecule[docker,lint]
+  - pip install ansible==$ANSIBLE_VERSION molecule[docker,lint]
   - pip install yamllint ansible-lint docker
 
   # Check ansible version
