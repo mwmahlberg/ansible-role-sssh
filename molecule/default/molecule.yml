@@ -4,7 +4,11 @@ dependency:
 driver:
   name: docker
 
-
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+  
 platforms:
   - name: sssh_centos7
     image: "geerlingguy/docker-centos7-ansible:latest"

@@ -20,18 +20,16 @@
   apt:
     update_cache: yes
   when: ansible_distribution == "Ubuntu" or ansible_distribution=="Debian"
+  changed_when: False
+
 - name: Ensure sshd is present
   package:
     name: openssh-server
     state: present
-  register: package
+  notify: "restart sshd"
 
-- name: Ensure sshd is enabled and started
-  systemd:
-    name: sshd
-    state: started
-    enabled: true
-  when: package.changed
+- name: Force all notified handlers to run at this point, not waiting for normal sync points
+  meta: flush_handlers
 
 - import_tasks: savemoduli.yml
   tags: moduli

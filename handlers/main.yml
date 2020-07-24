@@ -24,6 +24,7 @@
   service:
     name: sshd
     state: restarted
+    enabled: true
   when: ansible_os_family == "RedHat"
   listen: restart sshd
 
@@ -31,5 +32,18 @@
   service:
     name: ssh
     state: restarted
+    enabled: true
   when: ansible_os_family == "Debian"
   listen: restart sshd
+
+- name: Print new RSA key if one was generated
+  listen: "print new key"
+  debug:
+    var: rsakey.public_key
+  when: rsakey.changed
+
+- name: Print new RSA key if one was generated
+  listen: "print new key"
+  debug:
+    var: ed25519key.public_key
+  when: ed25519key.changed
