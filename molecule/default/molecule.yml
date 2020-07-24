@@ -8,65 +8,16 @@ lint: |
   set -e
   yamllint .
   ansible-lint
-  
+
 platforms:
-  - name: sssh_centos7
-    image: "geerlingguy/docker-centos7-ansible:latest"
+  - name: instance
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos8}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
     pre_build_image: true
-  - name: sssh_centos8
-    image: "geerlingguy/docker-centos8-ansible:latest"
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: true
-    pre_build_image: true
-    #docker pull geerlingguy/docker-ubuntu1604-ansible:latest
-  - name: ubuntu16.04_xenial
-    image: geerlingguy/docker-ubuntu1604-ansible:latest
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: true
-    pre_build_image: true    
-  - name: ubuntu18.04_bionic
-    image: geerlingguy/docker-ubuntu1804-ansible:latest
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: true
-    pre_build_image: true
-  - name: ubuntu20.04_focal
-    image: geerlingguy/docker-ubuntu2004-ansible:latest
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: true
-    pre_build_image: true
-  - name: debian8_jessie
-    image: geerlingguy/docker-debian8-ansible:latest
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: true
-    pre_build_image: true
-  - name: debian9_stretch
-    image: geerlingguy/docker-debian9-ansible:latest
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: true
-    pre_build_image: true
-  - name: debian10_buster
-    image: geerlingguy/docker-debian10-ansible:latest
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: true
-    pre_build_image: true
+
 provisioner:
   name: ansible
 verifier:
