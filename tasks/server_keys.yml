@@ -56,9 +56,13 @@
   openssh_keypair:
     type: ed25519
     path: /etc/ssh/ssh_host_ed25519_key
+  register: ed25519key
+  notify: "print new key"
 
 - name: Generate new ssh keys (rsa)
   openssh_keypair:
     type: rsa
     path: /etc/ssh/ssh_host_rsa_key
     size: "{{ sssh_rsa_key_size }}"
+  register: rsakey
+  notify: "print new key"
