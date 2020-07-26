@@ -10,7 +10,11 @@ Ansible role for a Secure OpenSSH configuration.
 > You should update immediately.
 
 ---
-<!-- TOC START min:2 max:3 link:true update:true -->
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=3 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
 - [Motivation](#motivation)
 - [What does the role configure?](#what-does-the-role-configure)
   - [Protocol version](#protocol-version)
@@ -20,6 +24,8 @@ Ansible role for a Secure OpenSSH configuration.
   - [Server Authentication](#server-authentication)
   - [Client Authentication](#client-authentication)
   - [Optional: `/etc/ssh/moduli`](#optional-etcsshmoduli)
+- [Supported Operating Systems and Versions](#supported-operating-systems-and-versions)
+- [Test matrix](#test-matrix)
 - [Installation](#installation)
 - [Role variables](#role-variables)
   - [Overview](#overview)
@@ -28,7 +34,7 @@ Ansible role for a Secure OpenSSH configuration.
   - [Instructions](#instructions)
   - [Screencast](#screencast)
 
-<!-- TOC END -->
+<!-- /code_chunk_output -->
 ---
 
 ## Motivation
@@ -154,6 +160,30 @@ As of the time of this writing, a `sssh_moduli_size` of 1024 is considered secur
 by todays standards. A size of 2048 bit is considered secure for the foreseeable
 future.
 
+## Supported Operating Systems and Versions
+
+Since I am limited in the time I can put into this project, this role will support the last two releases of the following operating systems.
+
+* CentOS and RedHat Enterprise Linux
+* Debian
+* Ubuntu (last two LTS releases)
+
+As for the exact versions, please see [the role information on Galaxy](https://galaxy.ansible.com/mwmahlberg/sssh).
+
+## Test matrix
+
+The role is tested against a complete matrix consisting of the following:
+
+* Python Versions 3.6, 3.7 and 3.8
+* Ansible Versions 2.9.2, 2.9.8, 2.9.9 and 2.9.10
+* OS Versions:
+  * CentOS 7 and 8
+  * Debian 9 and 10
+  * Ubuntu 18.04 and 20.04
+
+Before using the role in production, I strongly suggest to [look up whether your specific setup
+was successfully tested](https://travis-ci.org/github/mwmahlberg/ansible-role-sssh).
+
 ## Installation
 
 Simply drop
@@ -161,11 +191,6 @@ Simply drop
     $ ansible-galaxy install mwmahlberg.sssh
 
 into your shell.
-
-<!-- Click on the image below to see a screen recording on what to expect during the installation.
-
-<a href="https://asciinema.org/a/8KMZN2sPiSIfC29bqMqvBacFD?speed=2&theme=monokai&autoplay=1" target="_blank"><img src="https://asciinema.org/a/8KMZN2sPiSIfC29bqMqvBacFD.png"  width="250"/></a> -->
-[![asciicast](https://asciinema.org/a/187545.svg)](https://asciinema.org/a/187545?autoplay=1)
 
 ## Role variables
 
