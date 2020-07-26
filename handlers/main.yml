@@ -42,7 +42,7 @@
     var: rsakey.public_key
   when: rsakey.changed
 
-- name: Print new RSA key if one was generated
+- name: Print new ED25519 key if one was generated
   listen: "print new key"
   debug:
     var: ed25519key.public_key
