@@ -35,7 +35,10 @@ galaxy_info:
       versions:
         - focal
         - bionic
-        - xenial
+    - name: Debian
+      versions:
+        - buster
+        - stretch
 
   galaxy_tags: ["ssh", "sshd", "system", "openssh"]
     # List tags for your role here, one per line. A tag is a keyword that describes
