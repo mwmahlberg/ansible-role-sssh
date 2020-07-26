@@ -40,16 +40,11 @@ services:
 
 install:
   # Install ansible
-  - pip install ansible==$ANSIBLE_VERSION molecule[docker,lint]
-  - pip install yamllint ansible-lint docker
-
-  # Check ansible version
-  - ansible --version
-  - molecule --version
+  - pip install yamllint ansible-lint docker ansible==$ANSIBLE_VERSION molecule[docker,lint]
 
 script:
   # Run molecule tests
-  - molecule test
+  - molecule test --all
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
