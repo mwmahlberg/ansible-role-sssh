@@ -7,36 +7,47 @@ python:
   - "3.6"
   - "3.7"
   - "3.8"
+
 env:
-  - ANSIBLE=2.9.2
-  - ANSIBLE=2.9.3
-  - ANSIBLE=2.9.4
-  - ANSIBLE=2.9.5
-  - ANSIBLE=2.9.6
-  - ANSIBLE=2.9.7
-  - ANSIBLE=2.9.8
-  - ANSIBLE=2.9.9
-  - ANSIBLE=2.9.10
+  # Matrix built with https://play.golang.org/p/VNz0tiTDasm
+  - MOLECULE_DISTRO=centos7 ANSIBLE_VERSION=2.9.2
+  - MOLECULE_DISTRO=centos7 ANSIBLE_VERSION=2.9.8
+  - MOLECULE_DISTRO=centos7 ANSIBLE_VERSION=2.9.9
+  - MOLECULE_DISTRO=centos7 ANSIBLE_VERSION=2.9.10
+  - MOLECULE_DISTRO=centos8 ANSIBLE_VERSION=2.9.2
+  - MOLECULE_DISTRO=centos8 ANSIBLE_VERSION=2.9.8
+  - MOLECULE_DISTRO=centos8 ANSIBLE_VERSION=2.9.9
+  - MOLECULE_DISTRO=centos8 ANSIBLE_VERSION=2.9.10
+  - MOLECULE_DISTRO=ubuntu1804 ANSIBLE_VERSION=2.9.2
+  - MOLECULE_DISTRO=ubuntu1804 ANSIBLE_VERSION=2.9.8
+  - MOLECULE_DISTRO=ubuntu1804 ANSIBLE_VERSION=2.9.9
+  - MOLECULE_DISTRO=ubuntu1804 ANSIBLE_VERSION=2.9.10
+  - MOLECULE_DISTRO=ubuntu2004 ANSIBLE_VERSION=2.9.2
+  - MOLECULE_DISTRO=ubuntu2004 ANSIBLE_VERSION=2.9.8
+  - MOLECULE_DISTRO=ubuntu2004 ANSIBLE_VERSION=2.9.9
+  - MOLECULE_DISTRO=ubuntu2004 ANSIBLE_VERSION=2.9.10
+  - MOLECULE_DISTRO=debian9 ANSIBLE_VERSION=2.9.2
+  - MOLECULE_DISTRO=debian9 ANSIBLE_VERSION=2.9.8
+  - MOLECULE_DISTRO=debian9 ANSIBLE_VERSION=2.9.9
+  - MOLECULE_DISTRO=debian9 ANSIBLE_VERSION=2.9.10
+  - MOLECULE_DISTRO=debian10 ANSIBLE_VERSION=2.9.2
+  - MOLECULE_DISTRO=debian10 ANSIBLE_VERSION=2.9.8
+  - MOLECULE_DISTRO=debian10 ANSIBLE_VERSION=2.9.9
+  - MOLECULE_DISTRO=debian10 ANSIBLE_VERSION=2.9.10
 
 services:
 - docker
 
-# Install ansible
-addons:
-  apt:
-    packages:
-    - python-pip
 install:
   # Install ansible
-  - pip install ansible==$ANSIBLE
-  - pip install molecule[docker,lint]
+  - pip install ansible==$ANSIBLE_VERSION molecule[docker,lint]
+  - pip install yamllint ansible-lint docker
 
   # Check ansible version
   - ansible --version
   - molecule --version
 
 script:
-
   # Run molecule tests
   - molecule test
 

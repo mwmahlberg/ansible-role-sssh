@@ -16,7 +16,20 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ---
 # tasks file for ansible-role-sssh
+- name: Ensure apt cache is updated
+  apt:
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu" or ansible_distribution=="Debian"
+  changed_when: False
 
+- name: Ensure sshd is present
+  package:
+    name: openssh-server
+    state: present
+  notify: "restart sshd"
+
+- name: Force all notified handlers to run at this point, not waiting for normal sync points
+  meta: flush_handlers
 
 - import_tasks: savemoduli.yml
   tags: moduli
