@@ -199,10 +199,11 @@ Below you will find the variables used in this role.
 ### Overview
 ---
 
-| Name                 | Default  | Description                                   |
-| -------------------- | -------- | --------------------------------------------- |
-| sssh_moduli_generate | false    | wether a new modulus file should be generated |
-| sssh_moduli_size     | 4096     | size of each individual modulus               |
+| Name                 | Default  | Description                                       |
+| -------------------- | -------- | ------------------------------------------------- |
+| sssh_moduli_generate | false    | whether a new modulus file should be generated    |
+| sssh_moduli_size     | 4096     | size of each individual modulus                   |
+| sssh_force_new_keys  | false    | If true, existing server keys will be regenerated |
 | sssh_kex_algorithms  | - `curve25519-sha256@libssh.org`<br/> - `diffie-hellman-group-exchange-sha256` | key exchange algorithms permitted |
 | sssh_ciphers         |<br/> - `aes256-gcm@openssh.com`<br/> - `aes256-ctr`<br/> - `chacha20-poly1305@openssh.com`<br/> - `aes192-ctr`<br/> - `aes128-gcm@openssh.com`<br/> - `aes128-ctr` | sssh_ciphers supported for encryption |
 | sssh_macs            |- `hmac-sha2-512-etm@openssh.com`<br/>- `hmac-sha2-256-etm@openssh.com`<br/>- `umac-128-etm@openssh.com`<br/>- `hmac-sha2-512`<br/>- `hmac-sha2-256`<br/>- `umac-128@openssh.com`<br/>| Message Authentication Codes supported |

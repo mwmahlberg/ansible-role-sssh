@@ -56,7 +56,10 @@
   openssh_keypair:
     type: ed25519
     path: /etc/ssh/ssh_host_ed25519_key
+    force: "{{ sssh_force_new_keys | bool }}"
   register: ed25519key
+  # Necessary for molecule's idempotence check
+  changed_when: "ed25519key.changed and not sssh_force_new_keys"
   notify: "print new key"
 
 - name: Generate new ssh keys (rsa)
@@ -64,5 +67,8 @@
     type: rsa
     path: /etc/ssh/ssh_host_rsa_key
     size: "{{ sssh_rsa_key_size }}"
+    force: "{{ sssh_force_new_keys | bool }}"
   register: rsakey
+  # Necessary for molecule's idempotence check
+  changed_when: "rsakey.changed and not sssh_force_new_keys"
   notify: "print new key"
