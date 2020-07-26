@@ -40,4 +40,4 @@ sssh_macs:
   - "hmac-sha2-256"
   - "umac-128@openssh.com"
 
-sssh_force_new_keys: false
+sssh_key_regen: false
