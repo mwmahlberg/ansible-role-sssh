@@ -60,11 +60,13 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install test dependencies.
+        run: pip3 install -r requirements.txt
+
       - name: Run Molecule tests.
         run: pip3 install -r requirements.txt && molecule --debug test -s ci
         working-directory: 'mwmahlberg.sssh/extensions/'
         env:
-          ANSIBLE_REMOTE_TMP: "/tmp/ansible"
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
           MOLECULE_DISTRO: ${{ matrix.distro }}          
