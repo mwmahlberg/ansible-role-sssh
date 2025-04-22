@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ---
-- name: create new moduli for diffie-hellman-group-exchange-sha256
-  command: bash -c "ssh-keygen -b {{ sssh_moduli_size }} -G /dev/stdout | ssh-keygen -T /etc/ssh/moduli.new"
+- name: Create new moduli for diffie-hellman-group-exchange-sha256
+  ansible.builtin.command: bash -c "ssh-keygen -b {{ sssh_moduli_size }} -G /dev/stdout | ssh-keygen -T /etc/ssh/moduli.new"
   args:
     creates: /etc/ssh/moduli.new
 
-- name: replace existing moduli for diffie-hellman-group-exchange-sha256
-  command: mv /etc/ssh/moduli.new /etc/ssh/moduli
+- name: Replace existing moduli for diffie-hellman-group-exchange-sha256
+  ansible.builtin.command: mv /etc/ssh/moduli.new /etc/ssh/moduli
   args:
     removes: /etc/ssh/moduli.new

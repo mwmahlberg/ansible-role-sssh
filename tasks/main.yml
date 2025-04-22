@@ -17,94 +17,96 @@
 ---
 # tasks file for ansible-role-sssh
 - name: Ensure apt cache is updated
-  apt:
+  ansible.builtin.apt:
     update_cache: yes
   when: ansible_distribution == "Ubuntu" or ansible_distribution=="Debian"
   changed_when: False
 
 - name: Ensure sshd is present
-  package:
+  ansible.builtin.package:
     name: openssh-server
     state: present
-  notify: "restart sshd"
+  notify: "Restart sshd"
 
 - name: Ensure only secure server key pairs are (re-)generated (RedHat > 8)
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /usr/lib/systemd/system/sshd-keygen.target
     regexp: '^Wants=sshd-keygen@ecdsa.service'
     line: '^#?\s*Wants=sshd-keygen@ecdsa.service'
-  notify: reload systemd
+  notify: 'Reload systemd'
   when: ansible_os_family == 'RedHat'
 
 - name: Force all notified handlers to run at this point, not waiting for normal sync points
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
 
-- import_tasks: savemoduli.yml
+- name: Create save modulus files
+  ansible.builtin.import_tasks: savemoduli.yml
   tags: moduli
   when: sssh_moduli_generate and "diffie-hellman-group-exchange-sha256" in sssh_kex_algorithms
 
 # https://bugs.launchpad.net/ubuntu/+source/openssh/+bug/45234
 - name: Ensure privilege separation directory is present
-  file:
+  ansible.builtin.file:
     path: /run/sshd
     owner: root
     group: root
-    mode: 0755
+    mode: '0755'
     state: directory
   when: ansible_os_family == 'Debian'
 
-- import_tasks: server_keys.yml
+- name: Configure server keys
+  ansible.builtin.import_tasks: server_keys.yml
 
 - name: Limit to protocol version 2
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     regexp: '^\s*Protocol.*'
     line: 'Protocol 2'
     validate: "/usr/sbin/sshd -t -f %s"
-  notify: restart sshd
+  notify: Restart sshd
 
 - name: Enable Public Key Authentication
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     line: 'PubkeyAuthentication yes'
     state: present
-  notify: restart sshd
+  notify: Restart sshd
 
 - name: Limit Key Exchange algorithms
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     regexp: '^#?KexAlgorithms .*'
-    line: "KexAlgorithms {{ sssh_kex_algorithms|join(',') }}"
+    line: "KexAlgorithms {{ sssh_kex_algorithms | join(',') }}"
     validate: "/usr/sbin/sshd -t -f %s"
-  notify: restart sshd
+  notify: Restart sshd
 
 - name: Limit Ciphers
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     regexp: "^#?Ciphers .*"
-    line: "Ciphers {{ sssh_ciphers|join(',') }}"
+    line: "Ciphers {{ sssh_ciphers | join(',') }}"
     validate: "/usr/sbin/sshd -t -f %s"
-  notify: restart sshd
+  notify: Restart sshd
 
 - name: Limit Message Authentication Codes
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     regexp: "^#?MACs .*"
-    line: "MACs {{ sssh_macs|join(',') }}"
+    line: "MACs {{ sssh_macs | join(',') }}"
     validate: "/usr/sbin/sshd -t -f %s"
-  notify: restart sshd
+  notify: Restart sshd
 
 - name: Disable password based authentication
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     regexp: '^\s*PasswordAuthentication'
     line: 'PasswordAuthentication no'
     state: present
-  notify: restart sshd
+  notify: Restart sshd
 
 - name: Disable Challenge Response Authentication
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     regexp: '^\s*ChallengeResponseAuthentication\s*yes'
     state: absent
-  notify: restart sshd
+  notify: Restart sshd

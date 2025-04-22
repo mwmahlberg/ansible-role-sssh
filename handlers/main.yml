@@ -17,33 +17,33 @@
 ---
 # handlers file for ansible-role-sssh
 
-- name: reload systemd
-  systemd:
+- name: Reload systemd
+  ansible.builtin.systemd:
     daemon_reload: yes
-- name: restart sshd on RedHat family OSes
-  service:
+- name: Restart sshd on RedHat family OSes
+  ansible.builtin.service:
     name: sshd
     state: restarted
     enabled: true
   when: ansible_os_family == "RedHat"
-  listen: restart sshd
+  listen: Restart sshd
 
-- name: restart ssh on Debian family OSes
-  service:
+- name: Restart ssh on Debian family OSes
+  ansible.builtin.service:
     name: ssh
     state: restarted
     enabled: true
   when: ansible_os_family == "Debian"
-  listen: restart sshd
+  listen: Restart sshd
 
 - name: Print new RSA key if one was generated
-  listen: "print new key"
-  debug:
+  listen: "Print new key"
+  ansible.builtin.debug:
     var: rsakey.public_key
   when: rsakey.changed
 
 - name: Print new ED25519 key if one was generated
-  listen: "print new key"
-  debug:
+  listen: "Print new key"
+  ansible.builtin.debug:
     var: ed25519key.public_key
   when: ed25519key.changed

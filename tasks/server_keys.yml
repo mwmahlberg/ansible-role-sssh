@@ -19,36 +19,36 @@
 
 
 - name: Remove potentially insecure ECDSA server key from sshd config
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     regexp: '^#?\s*HostKey /etc/ssh/ssh_host_ecdsa_key'
     line: '# HostKey /etc/ssh/ssh_host_ecdsa_key'
 
 - name: Remove potentially insecure ECDSA server key (private)
-  file:
+  ansible.builtin.file:
     path: /etc/ssh/ssh_host_ecdsa_key
     state: absent
 
 - name: Remove potentially insecure ECDSA server key (public)
-  file:
+  ansible.builtin.file:
     path: /etc/ssh/ssh_host_ecdsa_key.pub
     state: absent
 
 - name: Generate new ssh keys (ed25519)
-  openssh_keypair:
+  community.crypto.openssh_keypair:
     type: ed25519
     path: /etc/ssh/ssh_host_ed25519_key
     regenerate: "full_idempotence"
     comment: "Created by ansible"
   register: ed25519key
-  notify: "print new key"
+  notify: "Print new key"
 
 - name: Generate new ssh keys (rsa)
-  openssh_keypair:
+  community.crypto.openssh_keypair:
     type: rsa
     path: /etc/ssh/ssh_host_rsa_key
     size: "{{ sssh_rsa_key_size }}"
     regenerate: "full_idempotence"
     comment: "Created by ansible"
   register: rsakey
-  notify: "print new key"
+  notify: "Print new key"
