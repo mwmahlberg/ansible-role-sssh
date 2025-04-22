@@ -28,6 +28,14 @@
     state: present
   notify: "restart sshd"
 
+- name: Ensure only secure server key pairs are (re-)generated (RedHat > 8)
+  lineinfile:
+    path: /usr/lib/systemd/system/sshd-keygen.target
+    regexp: '^Wants=sshd-keygen@ecdsa.service'
+    line: '^#?\s*Wants=sshd-keygen@ecdsa.service'
+  notify: reload systemd
+  when: ansible_os_family == 'RedHat'
+
 - name: Force all notified handlers to run at this point, not waiting for normal sync points
   meta: flush_handlers
 
