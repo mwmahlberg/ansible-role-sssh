@@ -2,6 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Include ansible-role-sssh"
-      include_role:
+    - name: "Include mwmahlberg.sssh"
+      ansible.builtin.include_role:
         name: "mwmahlberg.sssh"

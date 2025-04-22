@@ -1,0 +1,73 @@
+name: CI
+'on':
+  pull_request:
+  push:
+    branches:
+      - master
+defaults:
+  run:
+    working-directory: 'mwmahlberg.sssh'
+
+jobs:
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v4
+        with:
+          path: 'mwmahlberg.sssh'
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install test dependencies.
+        run: pip3 install yamllint ansible-lint ansible-core
+
+      - name: Install ansible collections
+        run: ansible-galaxy install -r requirements.yml
+      - name: Lint code.
+        run: |
+          yamllint .
+    
+      - name: Lint Ansible code.
+        run: |
+          ansible-lint .
+
+  molecule:
+    name: Molecule
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro:
+          - rockylinux9
+            # - ubuntu2204
+            # - ubuntu2004
+            # - debian12
+            # - debian11
+
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v4
+        with:
+          path: 'mwmahlberg.sssh'
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install test dependencies.
+        run: pip3 install ansible molecule molecule-plugins[docker] docker
+
+
+      - name: Run Molecule tests.
+        run: molecule test -s ci
+        working-directory: 'mwmahlberg.sssh/extensions/'
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_DISTRO: ${{ matrix.distro }}          
