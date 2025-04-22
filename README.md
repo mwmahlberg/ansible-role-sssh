@@ -30,6 +30,8 @@ Ansible role for a Secure OpenSSH configuration.
 - [Role variables](#role-variables)
   - [Overview](#overview)
   - [Notes on variables](#notes-on-variables)
+    - [sssh\_moduli\_generate](#sssh_moduli_generate)
+    - [sssh\_moduli\_size](#sssh_moduli_size)
 - [Usage](#usage)
   - [Instructions](#instructions)
   - [Screencast](#screencast)
@@ -177,9 +179,10 @@ The role is tested against a complete matrix consisting of the following:
 * Python Versions 3.6, 3.7 and 3.8
 * Ansible Versions 2.9.2, 2.9.8, 2.9.9 and 2.9.10
 * OS Versions:
-  * CentOS 7 and 8
-  * Debian 9 and 10
-  * Ubuntu 18.04 and 20.04
+  * AmazonLinux 2023
+  * RockLinux 9
+  * Debian 11 and 12
+  * Ubuntu 20.04 and 22.04
 
 Before using the role in production, I strongly suggest to [look up whether your specific setup
 was successfully tested](https://travis-ci.org/github/mwmahlberg/ansible-role-sssh).
