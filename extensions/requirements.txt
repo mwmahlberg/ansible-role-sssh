@@ -3,3 +3,4 @@ ansible-lint
 molecule >= 25.4.0
 molecule-plugins >= 23.7.0
 yamllint
+docker
