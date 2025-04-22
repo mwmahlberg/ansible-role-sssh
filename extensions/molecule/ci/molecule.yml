@@ -6,13 +6,13 @@ platforms:
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-rockylinux9}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
     privileged: true
     pre_build_image: true
     cgroupns_mode: host
     systemd: always
     capabilities:
-      - SYS_ADMIN
+    - SYS_ADMIN
     tmpfs:
     - /tmp
     - /run
