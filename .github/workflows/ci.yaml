@@ -44,7 +44,7 @@ jobs:
       matrix:
         distro:
           - rockylinux9
-            # - ubuntu2204
+          - ubuntu2204
             # - ubuntu2004
             # - debian12
             # - debian11
