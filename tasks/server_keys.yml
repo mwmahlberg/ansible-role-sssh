@@ -17,24 +17,6 @@
 
 ---
 
-- name: Ensure only secure server key pairs are (re-)generated
-  lineinfile:
-    path: /usr/lib/systemd/system/sshd-keygen.target
-    regexp: '^Wants=sshd-keygen@ecdsa.service'
-    line: '^#?\s*Wants=sshd-keygen@ecdsa.service'
-  notify: reload systemd
-  when: ansible_os_family == 'RedHat' and ansible_distribution_version >= '8'
-
-- name: Ensure only secure server key pairs are (re-)generated
-  lineinfile:
-    path: /etc/sysconfig/sshd
-    regexp: '^#?\s?AUTOCREATE_SERVER_KEYS'
-    line: 'AUTOCREATE_SERVER_KEYS="RSA ED25519"'
-  when: ansible_os_family == 'RedHat' and ansible_distribution_version < '8'
-
-
-- name: Reload systemd
-  meta: flush_handlers
 
 - name: Remove potentially insecure ECDSA server key from sshd config
   lineinfile:
@@ -56,6 +38,8 @@
   openssh_keypair:
     type: ed25519
     path: /etc/ssh/ssh_host_ed25519_key
+    regenerate: "full_idempotence"
+    comment: "Created by ansible"
   register: ed25519key
   notify: "print new key"
 
@@ -64,5 +48,7 @@
     type: rsa
     path: /etc/ssh/ssh_host_rsa_key
     size: "{{ sssh_rsa_key_size }}"
+    regenerate: "full_idempotence"
+    comment: "Created by ansible"
   register: rsakey
   notify: "print new key"
