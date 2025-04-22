@@ -61,11 +61,9 @@ jobs:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip3 install ansible molecule molecule-plugins[docker] docker
-
-
+        run: pip3 install -r requirements.txt
       - name: Run Molecule tests.
-        run: molecule --debug test -s ci
+        run: ls -lah && molecule --debug test -s ci
         working-directory: 'mwmahlberg.sssh/extensions/'
         env:
           ANSIBLE_REMOTE_TMP: "{{ runner_tmp }}"
