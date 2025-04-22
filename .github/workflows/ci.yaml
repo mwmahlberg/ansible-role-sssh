@@ -65,7 +65,7 @@ jobs:
 
 
       - name: Run Molecule tests.
-        run: molecule test -s ci
+        run: molecule --debug test -s ci
         working-directory: 'mwmahlberg.sssh/extensions/'
         env:
           ANSIBLE_REMOTE_TMP: "{{ runner_tmp }}"
