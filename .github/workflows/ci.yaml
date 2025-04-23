@@ -65,7 +65,7 @@ jobs:
 
       - name: Run Molecule tests.
         run: molecule --debug test -s ci
-        working-directory: 'mwmahlberg.sssh/extensions/'
+        working-directory: 'mwmahlberg.sssh'
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
