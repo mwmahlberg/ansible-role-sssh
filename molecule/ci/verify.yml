@@ -8,13 +8,15 @@
     ansible.builtin.stat:
       path: /etc/ssh/ssh_host_ecdsa_key
     register: ecdsakey
-  - name: ECDSA private key is no longer present
+  - name: Ensure ECDSA private key was not regenerated
     ansible.builtin.assert:
       that: not ecdsakey.stat.exists
+      success_msg: "ECDSA private key is not present"
   - name: Look for ECDSA public key
     ansible.builtin.stat:
       path: /etc/ssh/ssh_host_ecdsa_key.pub
     register: ecdsa
-  - name: ECDSA public key is no longer present
+  - name: Ensure ECDSA public key was not regenerated
     ansible.builtin.assert:
       that: not ecdsa.stat.exists
+      success_msg: "ECDSA public key is not present"
