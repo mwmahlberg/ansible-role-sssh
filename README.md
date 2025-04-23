@@ -1,7 +1,7 @@
 ansible-role-sssh
 =================
 
-[![GitHub license](https://img.shields.io/github/license/mwmahlberg/ansible-role-sssh.svg)](https://github.com/mwmahlberg/ansible-role-sssh/blob/master/LICENSE) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mwmahlberg/ansible-role-sssh/ci.yaml) ![GitHub issues](https://img.shields.io/github/issues-raw/mwmahlberg/ansible-role-sssh)
+[![GitHub license](https://img.shields.io/github/license/mwmahlberg/ansible-role-sssh.svg)](https://github.com/mwmahlberg/ansible-role-sssh/blob/master/LICENSE) [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mwmahlberg/ansible-role-sssh/ci.yaml)](https://github.com/mwmahlberg/ansible-role-sssh/actions/workflows/ci.yaml) ![GitHub issues](https://img.shields.io/github/issues-raw/mwmahlberg/ansible-role-sssh)
 
 Ansible role for a Secure OpenSSH configuration.
 
