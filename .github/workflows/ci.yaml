@@ -9,7 +9,6 @@ name: CI
   push:
     branches:
       - 'release/*'
-      - develop
 defaults:
   run:
     working-directory: 'mwmahlberg.sssh'
