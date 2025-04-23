@@ -31,8 +31,8 @@ Ansible role for a Secure OpenSSH configuration.
 - [Role variables](#role-variables)
   - [Overview](#overview)
   - [Notes on variables](#notes-on-variables)
-    - [sssh\_moduli\_generate](#sssh_moduli_generate)
-    - [sssh\_moduli\_size](#sssh_moduli_size)
+    - [`sssh_moduli_generate`](#sssh_moduli_generate)
+    - [`sssh_moduli_size`](#sssh_moduli_size)
 - [Usage](#usage)
   - [Instructions](#instructions)
   - [Screencast](#screencast)
@@ -61,8 +61,8 @@ But the bottom line is: if the ssh server is not configured correctly,
 the security provided by the use of SSH may be reduced or even be eliminated.
 
 This repository contains an [ansible][wp:ansible] role based on
-[@stribika][gh:stribika]'s excellent [blog post on securely
-configuring the OpenSSH server][gh:sssh].
+[@stribika][gh:stribika]'s excellent [blog post on how to securely
+configure the OpenSSH server][gh:sssh].
 If you have not read it yet, I strongly recommend doing so.
 
 What does the role configure?
@@ -83,8 +83,8 @@ of the session key, he or she can eavesdrop the remaining communication.
 Therefor it is important to secure the initial key exchange. This means using
 only the most trustworthy algorithms with proper key sizes.
 
-Per [default](#overview), only the libssh.org implementation of curve25519-sha256
-and diffie-hellman-group-exchange-sha256 are allowed.
+Per [default](#overview), only the libssh.org implementation of
+curve25519-sha256 and diffie-hellman-group-exchange-sha256 are allowed.
 
 ### Ciphers
 
@@ -93,15 +93,15 @@ the client and the server. Since there is a
 [known vulnerability on the CBC cipher mode][wp:ssh-vulnerabilities-cbc],
 all ciphers using this mode are excluded by default.
 
-The DES and and RC4 ciphers are not deemed suffciently secured any more and therefor
-are excluded by default.
+The DES and and RC4 ciphers are not deemed suffciently secured any more and
+therefor are excluded by default.
 
 > **Note**
 >
 > You might wonder why `aes128-gcm@openssh.com` and `aes128-ctr` are included
 > by default. Since they are run in [Counter Mode (ctr)][wp:ctr] or
 > [Galois/Counter Mode(gcm)][wp:gcm] they are considered suffciently secure,
-> despite its relative small key size.
+> despite the relative small key size.
 
 ### Message Authentication Codes
 
@@ -180,9 +180,9 @@ will take at least hours, if not days to finish. This is a failsafe default,
 so that when you accidentally activate the regeneration of `/etc/ssh/moduli`,
 you end up with a rock solid state.
 
-As of the time of this writing, a `sssh_moduli_size` of 1024 is considered secure
-by todays standards. A size of 2048 bit is considered secure for the foreseeable
-future.
+As of the time of this writing, a `sssh_moduli_size` of 1024 is considered
+secure by todays standards. A size of 2048 bit is considered secure for the
+foreseeable future.
 
 Supported Operating Systems and Versions
 ----------------------------------------
@@ -240,7 +240,7 @@ Below you will find the variables used in this role.
 
 ### Notes on variables
 
-#### sssh_moduli_generate
+#### `sssh_moduli_generate`
 
 If set to `true`, the file [`/etc/ssh/moduli`][man:moduli] will be regenerated.
 
@@ -261,7 +261,7 @@ from `ssh_kex_algotithms` and will be ignored in this case.
 You might also want to read Thomas Pornin's excellent explanation of
 the potential [consequences of a `/etc/ssh/moduli` tampered by an attacker][se:moduli].
 
-#### sssh_moduli_size
+#### `sssh_moduli_size`
 
 The minimum modulus size is 1024 and is considered suffciently secure as of the
 time of this writing.
