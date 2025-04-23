@@ -52,7 +52,7 @@ jobs:
           - rockylinux9
           - fedora42
           - fedora41
-          - ubtuntu2404
+          - ubuntu2404
           - ubuntu2204
           - debian12
           - debian11
