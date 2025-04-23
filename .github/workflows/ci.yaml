@@ -30,7 +30,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip3 install yamllint ansible-lint ansible-core
+        run: pip3 install -q yamllint ansible-lint ansible-core
 
       - name: Install ansible collections
         run: ansible-galaxy install -r requirements.yml
@@ -69,7 +69,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip3 install -r requirements.txt
+        run: pip3 install -q -r requirements.txt
 
       - name: Run Molecule tests.
         run: molecule test -s ci
