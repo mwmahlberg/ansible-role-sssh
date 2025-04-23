@@ -1,0 +1,15 @@
+# Default state for all rules
+default: true
+
+# Path to configuration file to extend
+extends: null
+
+# MD001/heading-increment : Heading levels should only increment by one level at a time : https://github.com/DavidAnson/markdownlint/blob/v0.37.4/doc/md001.md
+MD001: true
+MD003:
+  style: setext_with_atx
+MD004:
+  style: sublist
+MD049:
+  style: underscore
+
