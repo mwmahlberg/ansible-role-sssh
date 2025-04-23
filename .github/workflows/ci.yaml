@@ -1,9 +1,14 @@
 name: CI
 'on':
   pull_request:
+    types:
+      - opened
+    branches:
+      - 'master'    
   push:
     branches:
       - master
+      - develop
 defaults:
   run:
     working-directory: 'mwmahlberg.sssh'
@@ -39,15 +44,18 @@ jobs:
 
   molecule:
     name: Molecule
+    needs: lint
     runs-on: ubuntu-latest
     strategy:
       matrix:
         distro:
           - rockylinux9
+          - fedora42
+          - fedora41
+          - ubtuntu2404
           - ubuntu2204
-            # - ubuntu2004
-            # - debian12
-            # - debian11
+          - debian12
+          - debian11
 
     steps:
       - name: Check out the codebase.
