@@ -181,7 +181,7 @@ The role is tested against a complete matrix consisting of the following:
   * AmazonLinux 2023
   * RockLinux 9
   * Debian 11 and 12
-  * Ubuntu 20.04 and 22.04
+  * Ubuntu 22.04 and 24.04
 
 Before using the role in production, I strongly suggest to [look up whether your specific setup
 was successfully tested]().
