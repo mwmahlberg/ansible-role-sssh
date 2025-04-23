@@ -209,7 +209,7 @@ The role is tested against a complete matrix consisting of the following:
   + Ubuntu 22.04 and 24.04
 
 Before using the role in production, I strongly suggest to [look up whether your
-specific setup was successfully tested](https://img.shields.io/github/actions/workflow/status/mwmahlberg/ansible-role-sssh/ci.yaml).
+specific setup was successfully tested](https://github.com/mwmahlberg/ansible-role-sssh/actions/workflows/ci.yaml).
 
 Installation
 ------------
