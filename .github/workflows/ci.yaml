@@ -4,11 +4,11 @@ name: CI
     types:
       - opened
     branches:
-      - 'master'    
+      - 'master'
+      - 'develop'
   push:
     branches:
-      - master
-      - develop
+      - 'release/*'
 defaults:
   run:
     working-directory: 'mwmahlberg.sssh'
