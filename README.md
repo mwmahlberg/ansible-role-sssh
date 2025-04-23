@@ -2,16 +2,13 @@ ansible-role-sssh
 =================
 
 <!-- markdownlint-disable MD013 -->
-[![GitHub license](https://img.shields.io/github/license/mwmahlberg/ansible-role-sssh.svg)](https://github.com/mwmahlberg/ansible-role-sssh/blob/master/LICENSE)
-[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mwmahlberg/ansible-role-sssh/ci.yaml)](https://github.com/mwmahlberg/ansible-role-sssh/actions/workflows/ci.yaml)
-![GitHub issues](https://img.shields.io/github/issues-raw/mwmahlberg/ansible-role-sssh)
+[![GitHub license](https://img.shields.io/github/license/mwmahlberg/ansible-role-sssh.svg?style=flat-square&color=bright-green)](https://github.com/mwmahlberg/ansible-role-sssh/blob/master/LICENSE)
+[![GitHub Release](https://img.shields.io/github/v/release/mwmahlberg/ansible-role-sssh?style=flat-square)](https://github.com/mwmahlberg/ansible-role-sssh/releases/latest)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mwmahlberg/ansible-role-sssh/ci.yaml?style=flat-square)](https://github.com/mwmahlberg/ansible-role-sssh/actions/workflows/ci.yaml)
+[![GitHub issues](https://img.shields.io/github/issues-raw/mwmahlberg/ansible-role-sssh?style=flat-square)](https://github.com/mwmahlberg/ansible-role-sssh/issues)
 <!-- markdownlint-enable MD013 -->
-Ansible role for a Secure OpenSSH configuration.
 
-> :warning: All versions prior to 1.2.2 contain a [bug which causes both the
-> ED25519 and RSA key files to contain ED25519 keys](https://github.com/mwmahlberg/ansible-role-sssh/issues/8).
->
-> You should update immediately.
+Ansible role for a Secure OpenSSH configuration.
 
 ---
 <!-- markdownlint-disable MD004 -->
