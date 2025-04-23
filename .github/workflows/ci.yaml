@@ -4,10 +4,11 @@ name: CI
     types:
       - opened
     branches:
-      - 'master'    
+      - 'master'
+      - 'develop'
   push:
     branches:
-      - master
+      - 'release/*'
       - develop
 defaults:
   run:
