@@ -72,7 +72,7 @@ jobs:
         run: pip3 install -r requirements.txt
 
       - name: Run Molecule tests.
-        run: molecule --debug test -s ci
+        run: molecule test -s ci
         working-directory: 'mwmahlberg.sssh'
         env:
           PY_COLORS: '1'
