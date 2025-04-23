@@ -1,7 +1,7 @@
 ansible-role-sssh
 =================
 
-[![GitHub license](https://img.shields.io/github/license/mwmahlberg/ansible-role-sssh.svg)](https://github.com/mwmahlberg/ansible-role-sssh/blob/master/LICENSE) [![Build Status](https://travis-ci.org/mwmahlberg/ansible-role-sssh.svg?branch=master)](https://travis-ci.org/mwmahlberg/ansible-role-sssh) ![GitHub issues](https://img.shields.io/github/issues-raw/mwmahlberg/ansible-role-sssh)
+[![GitHub license](https://img.shields.io/github/license/mwmahlberg/ansible-role-sssh.svg)](https://github.com/mwmahlberg/ansible-role-sssh/blob/master/LICENSE) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mwmahlberg/ansible-role-sssh/ci.yaml) ![GitHub issues](https://img.shields.io/github/issues-raw/mwmahlberg/ansible-role-sssh)
 
 Ansible role for a Secure OpenSSH configuration.
 
@@ -176,16 +176,15 @@ As for the exact versions, please see [the role information on Galaxy](https://g
 
 The role is tested against a complete matrix consisting of the following:
 
-* Python Versions 3.6, 3.7 and 3.8
-* Ansible Versions 2.9.2, 2.9.8, 2.9.9 and 2.9.10
+* Python Versions 3.11, 3.12 and 3.13
 * OS Versions:
   * AmazonLinux 2023
   * RockLinux 9
   * Debian 11 and 12
-  * Ubuntu 20.04 and 22.04
+  * Ubuntu 22.04 and 24.04
 
 Before using the role in production, I strongly suggest to [look up whether your specific setup
-was successfully tested](https://travis-ci.org/github/mwmahlberg/ansible-role-sssh).
+was successfully tested]().
 
 ## Installation
 

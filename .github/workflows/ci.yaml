@@ -1,9 +1,14 @@
 name: CI
 'on':
   pull_request:
+    types:
+      - opened
+    branches:
+      - 'master'    
   push:
     branches:
       - master
+      - develop
 defaults:
   run:
     working-directory: 'mwmahlberg.sssh'
@@ -25,7 +30,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip3 install yamllint ansible-lint ansible-core
+        run: pip3 install -q yamllint ansible-lint ansible-core
 
       - name: Install ansible collections
         run: ansible-galaxy install -r requirements.yml
@@ -39,15 +44,22 @@ jobs:
 
   molecule:
     name: Molecule
+    needs: lint
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        python-version:
+          - '3.13.x'
+          - '3.12.x'
+          - '3.11.x'
         distro:
           - rockylinux9
-            # - ubuntu2204
-            # - ubuntu2004
-            # - debian12
-            # - debian11
+          - fedora42
+          - fedora41
+          - ubuntu2404
+          - ubuntu2204
+          - debian12
+          - debian11
 
     steps:
       - name: Check out the codebase.
@@ -58,16 +70,16 @@ jobs:
       - name: Set up Python 3.
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: ${{ matrix.python-version }}
 
       - name: Install test dependencies.
-        run: pip3 install ansible molecule molecule-plugins[docker] docker
-
+        run: pip3 install -q -r requirements.txt
 
       - name: Run Molecule tests.
         run: molecule test -s ci
-        working-directory: 'mwmahlberg.sssh/extensions/'
+        working-directory: 'mwmahlberg.sssh'
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
-          MOLECULE_DISTRO: ${{ matrix.distro }}          
+          MOLECULE_DISTRO: ${{ matrix.distro }}
+          XDG_CONFIG_HOME: ""         
