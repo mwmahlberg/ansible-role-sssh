@@ -1,16 +1,20 @@
 ansible-role-sssh
 =================
 
-[![GitHub license](https://img.shields.io/github/license/mwmahlberg/ansible-role-sssh.svg)](https://github.com/mwmahlberg/ansible-role-sssh/blob/master/LICENSE) [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mwmahlberg/ansible-role-sssh/ci.yaml)](https://github.com/mwmahlberg/ansible-role-sssh/actions/workflows/ci.yaml) ![GitHub issues](https://img.shields.io/github/issues-raw/mwmahlberg/ansible-role-sssh)
-
+<!-- markdownlint-disable MD013 -->
+[![GitHub license](https://img.shields.io/github/license/mwmahlberg/ansible-role-sssh.svg)](https://github.com/mwmahlberg/ansible-role-sssh/blob/master/LICENSE)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mwmahlberg/ansible-role-sssh/ci.yaml)](https://github.com/mwmahlberg/ansible-role-sssh/actions/workflows/ci.yaml)
+![GitHub issues](https://img.shields.io/github/issues-raw/mwmahlberg/ansible-role-sssh)
+<!-- markdownlint-enable MD013 -->
 Ansible role for a Secure OpenSSH configuration.
 
-> :warning: All versions prior to 1.2.2 contain a [bug which causes both the ED25519 and RSA key files to contain ED25519 keys](https://github.com/mwmahlberg/ansible-role-sssh/issues/8).
+> :warning: All versions prior to 1.2.2 contain a [bug which causes both the
+> ED25519 and RSA key files to contain ED25519 keys](https://github.com/mwmahlberg/ansible-role-sssh/issues/8).
 >
 > You should update immediately.
 
 ---
-
+<!-- markdownlint-disable MD004 -->
 <!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=3 orderedList=false} -->
 
 <!-- code_chunk_output -->
@@ -37,27 +41,35 @@ Ansible role for a Secure OpenSSH configuration.
   - [Screencast](#screencast)
 
 <!-- /code_chunk_output -->
+<!-- markdownlint-enable MD004 -->
+<!-- markdownlint-disable MD046 -->
 ---
 
-## Motivation
+Motivation
+----------
 
-While SSH offers quite some security, its security heavily depends on its configuration.
+While SSH offers quite some security, its security heavily depends on its
+configuration.
 
 Generally speaking, SSH aims to provide
 
-1. The ability for the user to make sure he is talking to the endpoint he wants to talk to (server authentication)
-2. Encrypted communication, so that the user can be sure that his or her credentials and command are sent to the server securely
+1. The ability for the user to make sure he is talking to the endpoint he wants
+   to talk to (server authentication)
+2. Encrypted communication, so that the user can be sure that his or her
+   credentials and command are sent to the server securely
 3. the ability for the server to authenticate the user who wants to communicate.
 
 This is achieved through a variety of mechanisms discussed in depth elsewhere.
 But the bottom line is: if the ssh server is not configured correctly,
 the security provided by the use of SSH may be reduced or even be eliminated.
 
-This repository contains an [ansible][wp:ansible] role based on[@stribika][gh:stribika]'s
-excellent [blog post on securely configuring the OpenSSH server][gh:sssh].
+This repository contains an [ansible][wp:ansible] role based on
+[@stribika][gh:stribika]'s excellent [blog post on securely
+configuring the OpenSSH server][gh:sssh].
 If you have not read it yet, I strongly recommend doing so.
 
-## What does the role configure?
+What does the role configure?
+-----------------------------
 
 The role configures various aspects of OpenSSH, explained below.
 
@@ -87,21 +99,31 @@ all ciphers using this mode are excluded by default.
 The DES and and RC4 ciphers are not deemed suffciently secured any more and therefor
 are excluded by default.
 
-> **Note**<br/>
+> **Note**
+>
 > You might wonder why `aes128-gcm@openssh.com` and `aes128-ctr` are included
-> by default. Since they are run in [Counter Mode (ctr)][wp:ctr] or [Galois/Counter Mode(gcm)][wp:gcm]
-> they are considered suffciently secure, despite its relative small key size.
+> by default. Since they are run in [Counter Mode (ctr)][wp:ctr] or
+> [Galois/Counter Mode(gcm)][wp:gcm] they are considered suffciently secure,
+> despite its relative small key size.
 
 ### Message Authentication Codes
 
-The Message Authentication Codes (MACs) are used to ensure that a message has not been
-modified by a third party and that the message was actually sent by the communication partner.
+The Message Authentication Codes (MACs) are used to ensure that a message has
+not been modified by a third party and that the message was actually sent by the
+communication partner.
 
-> *There are multiple ways to combine ciphers and MACs - not all of these are useful. The 3 most common:<br/>
-> Encrypt-then-MAC: encrypt the message, then attach the MAC of the ciphertext.<br/>
-> MAC-then-encrypt: attach the MAC of the plaintext, then encrypt everything.<br/>
-> Encrypt-and-MAC: encrypt the message, then attach the MAC of the plaintext.<br/>
-> <br/>*
+> _There are multiple ways to combine ciphers and MACs - not all of these are
+> useful._
+>
+> _The 3 most common:_
+>
+> _Encrypt-then-MAC: encrypt the message, then attach the MAC of the
+> ciphertext._
+>
+> _MAC-then-encrypt: attach the MAC of the plaintext, then encrypt everything._
+>
+> _Encrypt-and-MAC: encrypt the message, then attach the MAC of the plaintext._
+>
 > excerpt from [@stribika's blog post on Secure SSH][gh:sssh]
 
 Only MACs which attach the MAC of the cyphertext ("Encrypt-then-MAC") are permitted
@@ -118,10 +140,10 @@ intended server, a man-in-the-middle attack could easily  be mounted.
 
 As of the time of this writing, there are four public key algorithms  available:
 
- - DSA
- - RSA
- - ECDSA
- - ED25519
+- DSA
+- RSA
+- ECDSA
+- ED25519
 
 The DSA algorithm has a fixed keylength of 1024, which is not considered secure nowadays.
 
@@ -134,24 +156,27 @@ are removed.
 
 The client authentication will be limited to Public Key Authentication.
 
-> **WARNING** <br/>
+> **WARNING**
+>
 > After applying this role on a server, you will not be able to log into
-> that server via SSH using passwords  any more!<br/>
-> Make ***sure*** you have Public Key Authentication ***tested*** for your administrative
-> account.
+> that server via SSH using passwords  any more!
+>
+> Make _**sure**_ you have Public Key Authentication _**tested**_ for your
+> administrative account.
 
 ### Optional: `/etc/ssh/moduli`
 
-The file `/etc/ssh/moduli` file is used by the diffie-hellman-group-exchange-sha256 key
-exchange algorithm to provide suffciently large prime numbers.
+The file `/etc/ssh/moduli` file is used by the
+diffie-hellman-group-exchange-sha256 key exchange algorithm to provide
+suffciently large prime numbers.
 
 If you set `sssh_moduli_generate` to true and `sssh_kex_algorithms` contains
-"diffie-hellman-group-exchange-sha256", new moduli will be generated with a bit size
-of `sssh_moduli_size`.
+"diffie-hellman-group-exchange-sha256", new moduli will be generated with a bit
+size of `sssh_moduli_size`.
 
-The generation is a two-step process. First, a large number of large numbers are generated.
-In the second step, those numbers are tested wether they are actually suffciently large
-prime numbers.
+The generation is a two-step process. First, a large number of large numbers
+are generated. In the second step, those numbers are tested wether they are
+actually suffciently large prime numbers.
 
 Note that with the default setting of 4096 for `sssh_moduli_size` this process
 will take at least hours, if not days to finish. This is a failsafe default,
@@ -162,45 +187,49 @@ As of the time of this writing, a `sssh_moduli_size` of 1024 is considered secur
 by todays standards. A size of 2048 bit is considered secure for the foreseeable
 future.
 
-## Supported Operating Systems and Versions
+Supported Operating Systems and Versions
+----------------------------------------
 
-Since I am limited in the time I can put into this project, this role will support the last two releases of the following operating systems.
+Since I am limited in the time I can put into this project, this role will
+support the last two releases of the following operating systems.
 
-* CentOS and RedHat Enterprise Linux
-* Debian
-* Ubuntu (last two LTS releases)
+- Fedora
+- Debian
+- Ubuntu (last two LTS releases)
 
 As for the exact versions, please see [the role information on Galaxy](https://galaxy.ansible.com/mwmahlberg/sssh).
 
-## Test matrix
+Test matrix
+-----------
 
 The role is tested against a complete matrix consisting of the following:
 
-* Python Versions 3.11, 3.12 and 3.13
-* OS Versions:
-  * AmazonLinux 2023
-  * RockLinux 9
-  * Debian 11 and 12
-  * Ubuntu 22.04 and 24.04
+- Python Versions 3.11, 3.12 and 3.13
+- OS Versions:
+  + AmazonLinux 2023
+  + RockLinux 9
+  + Debian 11 and 12
+  + Ubuntu 22.04 and 24.04
 
-Before using the role in production, I strongly suggest to [look up whether your specific setup
-was successfully tested]().
+Before using the role in production, I strongly suggest to [look up whether your
+specific setup was successfully tested](https://img.shields.io/github/actions/workflow/status/mwmahlberg/ansible-role-sssh/ci.yaml).
 
-## Installation
+Installation
+------------
 
 Simply drop
 
-    $ ansible-galaxy install mwmahlberg.sssh
+    ansible-galaxy install mwmahlberg.sssh
 
 into your shell.
 
-## Role variables
+Role variables
+--------------
 
 Below you will find the variables used in this role.
 
 ### Overview
----
-
+<!-- markdownlint-disable MD013 MD033 -->
 | Name                 | Default  | Description                                   |
 | -------------------- | -------- | --------------------------------------------- |
 | sssh_moduli_generate | false    | wether a new modulus file should be generated |
@@ -208,31 +237,45 @@ Below you will find the variables used in this role.
 | sssh_kex_algorithms  | - `curve25519-sha256@libssh.org`<br/> - `diffie-hellman-group-exchange-sha256` | key exchange algorithms permitted |
 | sssh_ciphers         |<br/> - `aes256-gcm@openssh.com`<br/> - `aes256-ctr`<br/> - `chacha20-poly1305@openssh.com`<br/> - `aes192-ctr`<br/> - `aes128-gcm@openssh.com`<br/> - `aes128-ctr` | sssh_ciphers supported for encryption |
 | sssh_macs            |- `hmac-sha2-512-etm@openssh.com`<br/>- `hmac-sha2-256-etm@openssh.com`<br/>- `umac-128-etm@openssh.com`<br/>- `hmac-sha2-512`<br/>- `hmac-sha2-256`<br/>- `umac-128@openssh.com`<br/>| Message Authentication Codes supported |
+<!-- markdownlint-enable MD013 MD033-->
 
 ---
+
 ### Notes on variables
+
 #### sssh_moduli_generate
+
 If set to `true`, the file [`/etc/ssh/moduli`][man:moduli] will be regenerated.
 
-> **Warning** <br/>
-> With the default `sssh_moduli_size` of 4096, the generated moduli will be *very* secure.<br/>
-> The downside of it is that the generation will take hours to even *days*.<br/>
+> **Warning**
+>
+> With the default `sssh_moduli_size` of 4096, the generated moduli will be
+> _very_ secure.
+> The downside of it is that the generation will take hours to even _days_.
 > You should choose a proper [modulus size](#sssh_moduli_size) carefully.
 
-It should only be set to `true` via commandline. If you set this to `true` in a playbook or inventory,
-`/etc/ssh/moduli` will be generated _each time_ the role is applied.
+It should only be set to `true` via commandline. If you set this to `true` in a
+playbook or inventory, `/etc/ssh/moduli` will be generated _each time_ the role
+is applied.
 
 This setting is useless when you exclude `diffie-hellman-group-exchange-sha256`
 from `ssh_kex_algotithms` and will be ignored in this case.
 
+You might also want to read Thomas Pornin's excellent explanation of
+the potential [consequences of a `/etc/ssh/moduli` tampered by an attacker][se:moduli].
+
 #### sssh_moduli_size
 
-The minimum modulus size is 1024 and is considered suffciently secure as of the time of this writing.
-However, the suggested modulus size is 2048, which is considered secure in the foreseeable future.
+The minimum modulus size is 1024 and is considered suffciently secure as of the
+time of this writing.
+However, the suggested modulus size is 2048, which is considered secure in the
+foreseeable future.
 
-The default value for `sssh_moduli_size` is 4096. This roughly translates to "Should be secure for all practical purposes".
+The default value for `sssh_moduli_size` is 4096. This roughly translates to
+"Should be secure for all practical purposes".
 
-## Usage
+Usage
+-----
 
 ### Instructions
 
@@ -241,16 +284,21 @@ The default value for `sssh_moduli_size` is 4096. This roughly translates to "Sh
    after applying the role.
    See [Client authentication](#client-authentication) for details.
 1. Add the role to the requirements of your playbook
+
+    ```none
+    cd ~/path/to/playbook/dir
+    echo "- src: mwmahlberg.sssh" >> requirements.yml
     ```
-    $ cd ~/path/to/playbook/dir
-    $ echo "- src: mwmahlberg.sssh" >> requirements.yml
+
+2. Install your requirements
+
+    ```none
+    ansible-galaxy install -r requirements.yml
     ```
-1. Install your requirements
-    ```
-    $ ansible-galaxy install -r requirements.yml
-    ```
-1. Assign the role to a host or a group and [configure it](#configure-it-to-your-needs).
-    ```
+
+3. Assign the role to a host or a group and [configure it](#role-variables).
+
+    ```none
     - hosts: all
       vars:
         sssh_kex_algorithms:
@@ -258,12 +306,12 @@ The default value for `sssh_moduli_size` is 4096. This roughly translates to "Sh
       roles:
         - mwmahlberg.sssh
     ```
-1. Run your playbook
+
+4. Run your playbook
 
 ### Screencast
 
 [![asciicast](https://asciinema.org/a/187545.svg)](https://asciinema.org/a/187545?autoplay=1)
-
 
 [wp:ansible]: https://en.wikipedia.org/wiki/Ansible_(software) "Wikipedia article on ansible"
 [wp:ssh-vulnerabilities-v1]: https://en.wikipedia.org/wiki/Secure_Shell#SSH-1
@@ -274,6 +322,4 @@ The default value for `sssh_moduli_size` is 4096. This roughly translates to "Sh
 [gh:sssh]: https://stribika.github.io/2015/01/04/secure-secure-shell.html
 
 [man:moduli]: https://linux.die.net/man/5/moduli
-[se:moduli]: https://security.stackexchange.com/questions/41941/consequences-of-tampered-etc-ssh-moduli
-
-[ansible:requirements.yml]: https://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html#installing-multiple-roles-from-a-file
+[se:moduli]: https://security.stackexchange.com/a/41947/73210
