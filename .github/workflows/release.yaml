@@ -16,7 +16,7 @@ jobs:
       release_url: ${{ steps.release.outputs.html_url }}
     steps:
       - name: Check out the codebase.
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: 'mwmahlberg.sssh'
       - name: Generate changelog.
@@ -50,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codebase.
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: 'mwmahlberg.sssh'
       - name: Set up Python 3.
